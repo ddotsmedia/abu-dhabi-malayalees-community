@@ -1,8 +1,6 @@
-version: '3.9'
-
 services:
   db:
-    image: postgres:15-alpine
+    image: postgres:14
     container_name: admc_db
     restart: unless-stopped
     env_file: .env
