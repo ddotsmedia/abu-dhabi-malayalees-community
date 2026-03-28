@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADMC Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+<!-- ============== LOGIN SCREEN ============== -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-mark">ADM</div>
+      <div>
+        <div class="login-title">Admin Panel</div>
+        <div class="login-sub">Abu Dhabi Malayalees Community</div>
+      </div>
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="admin" required autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password" />
+      </div>
+      <div class="login-error" id="loginError"></div>
+      <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+    </form>
+    <p class="login-back"><a href="/">← Back to website</a></p>
+  </div>
+</div>
+
+<!-- ============== APP SHELL ============== -->
+<div id="appShell" class="app-shell hidden">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-mark logo-mark-sm">ADM</div>
+      <div class="sidebar-title">ADMC Admin</div>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" data-section="events">
+        <span class="nav-icon">📅</span> Events
+      </a>
+      <a href="#" class="nav-item" data-section="news">
+        <span class="nav-icon">📰</span> News
+      </a>
+      <a href="#" class="nav-item" data-section="members">
+        <span class="nav-icon">👥</span> Members
+      </a>
+      <a href="#" class="nav-item" data-section="leadership">
+        <span class="nav-icon">🏅</span> Leadership
+      </a>
+      <a href="#" class="nav-item" data-section="contacts">
+        <span class="nav-icon">✉️</span> Contact
+        <span class="badge" id="contactBadge" style="display:none"></span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" class="nav-item nav-item-sm">🌐 View Site</a>
+      <a href="#" class="nav-item nav-item-sm" id="logoutBtn">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-wrap">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <h1 class="topbar-title" id="topbarTitle">Dashboard</h1>
+      <div class="topbar-user">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <span id="userLabel">admin</span>
+      </div>
+    </header>
+
+    <main class="content" id="mainContent">
+      <!-- Sections injected by JS -->
+    </main>
+  </div>
+</div>
+
+<!-- ============== MODAL ============== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Edit</h2>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -150,26 +150,51 @@
     backToTop.classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
 
-  /* ---- Contact form (demo) ---- */
+  /* ---- Contact form — POST to API ---- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
+      const btn      = this.querySelector('button[type="submit"]');
       const original = btn.textContent;
       btn.textContent = 'Sending\u2026';
       btn.disabled = true;
 
-      setTimeout(() => {
-        btn.textContent = '\u2713 Message Sent!';
+      const body = {
+        first_name: document.getElementById('firstName').value.trim(),
+        last_name:  document.getElementById('lastName').value.trim(),
+        email:      document.getElementById('email').value.trim(),
+        phone:      document.getElementById('phone').value.trim(),
+        subject:    document.getElementById('subject').value,
+        message:    document.getElementById('message').value.trim(),
+      };
+
+      try {
+        const res  = await fetch('/api/contact', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to send');
+        btn.textContent    = '\u2713 Message Sent!';
         btn.style.background = '#2ecc71';
+        contactForm.reset();
         setTimeout(() => {
-          btn.textContent = original;
+          btn.textContent  = original;
           btn.style.background = '';
           btn.disabled = false;
-          contactForm.reset();
+        }, 4000);
+      } catch (err) {
+        btn.textContent  = 'Failed — Try Again';
+        btn.style.background = '#e74c3c';
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent  = original;
+          btn.style.background = '';
         }, 3000);
-      }, 1200);
+        console.error(err);
+      }
     });
   }
 
