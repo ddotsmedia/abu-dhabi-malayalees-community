@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS news (
   updated_at     TIMESTAMPTZ  DEFAULT NOW()
 );
 
+CREATE SEQUENCE IF NOT EXISTS member_seq START 1;
+
 CREATE TABLE IF NOT EXISTS members (
   id                VARCHAR(30) PRIMARY KEY DEFAULT ('MBR-' || to_char(NOW(),'YYYY') || '-' || LPAD(nextval('member_seq')::TEXT, 4, '0')),
   first_name        VARCHAR(100) NOT NULL,
@@ -47,8 +49,6 @@ CREATE TABLE IF NOT EXISTS members (
   joined_date       DATE         DEFAULT CURRENT_DATE,
   created_at        TIMESTAMPTZ  DEFAULT NOW()
 );
-
-CREATE SEQUENCE IF NOT EXISTS member_seq START 1;
 
 CREATE TABLE IF NOT EXISTS leadership (
   id            SERIAL PRIMARY KEY,

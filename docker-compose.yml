@@ -47,8 +47,8 @@ services:
 
   web:
     build:
-      context: ./nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: nginx/Dockerfile
     container_name: admc_web
     restart: unless-stopped
     ports:
